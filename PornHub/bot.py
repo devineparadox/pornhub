@@ -1,0 +1,64 @@
+# PornHub/bot.py
+import time
+import logging
+import asyncio
+from pyrogram import Client, errors
+from pyrogram.raw.all import layer
+from my_bot.__version__ import __version__, __version_code__
+from my_bot.config import API_HASH, API_ID, TOKEN, log_chat
+
+logger = logging.getLogger(__name__)
+
+class PornHub(Client):
+    def __init__(self):
+        name = self.__class__.__name__.lower()
+
+        super().__init__(
+            name=name,
+            app_version=f"PornHub v{__version__}",
+            api_id=API_ID,
+            api_hash=API_HASH,
+            bot_token=TOKEN,
+            plugins=dict(root="my_bot.pornhub.plugins"),
+            in_memory=True,
+        )
+
+    async def start(self):
+        await super().start()
+        self.start_time = time.time()
+        logger.info(
+            "PornHub running with Pyrogram v%s (Layer %s) started on %s. Hello!",
+            pyrogram.__version__,
+            layer,
+            self.me.username,
+        )
+
+        start_message = (
+            "<b>PornHub started!</b>\n\n"
+            f"<b>Version:</b> <code>v{__version__} ({__version_code__})</code>\n"
+            f"<b>Pyrogram:</b> <code>v{pyrogram.__version__}</code>"
+        )
+
+        try:
+            await self.send_message(chat_id=log_chat, text=start_message)
+        except errors.BadRequest:
+            logger.warning("Unable to send message to log_chat!")
+
+    async def stop(self, *args):
+        await super().stop()
+        logger.warning("PornHub stopped, Bye!")
+
+def main():
+    app = PornHub()
+    loop = asyncio.get_event_loop()
+
+    try:
+        loop.run_until_complete(app.start())
+        loop.run_forever()
+    except (KeyboardInterrupt, SystemExit):
+        loop.run_until_complete(app.stop())
+    finally:
+        loop.close()
+
+if __name__ == "__main__":
+    main()
