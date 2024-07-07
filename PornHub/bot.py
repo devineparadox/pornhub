@@ -18,7 +18,7 @@ class PornHub(Client):
             api_id=API_ID,
             api_hash=API_HASH,
             bot_token=TOKEN,
-            plugins=dict(root="my_bot.pornhub.plugins"),
+            plugins=dict(root="Pornhub.plugins"),
             in_memory=True,
         )
 
