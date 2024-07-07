@@ -147,13 +147,11 @@ async def command_list(_, update: Message):
 🛠 Command list:
 » /start - start this bot
 » /help  - showing this message
-» /ping  - check bot status
     """
     text_2 = """
 🛠 Command list:
 » /start - start this bot
 » /help  - showing this message
-» /ping  - check bot status
 » /stats - show bot statistic
 » /gcast - broadcast message
     """
@@ -161,13 +159,3 @@ async def command_list(_, update: Message):
         await update.reply_text(text_2)
     else:
         await update.reply_text(text_1)
-
-
-@Client.on_message(filters.command("ping", prefixs))
-async def ping(c: Client, u: Message):
-    first = datetime.now()
-    sent = await u.reply_text("<b>pinging...</b>")
-    second = datetime.now()
-    await sent.edit_text(
-       f"🏓 <b>PONG !</b>\n⏱ <code>{(second - first).microseconds / 1000}</code> ms"
-    )
