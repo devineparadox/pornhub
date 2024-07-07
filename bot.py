@@ -6,12 +6,11 @@ from pyrogram import Client
 from pyrogram.errors import BadRequest
 from pyrogram.raw.all import layer
 
-from . import __version__, __version_code__
-from .config import API_HASH, API_ID, TOKEN, log_chat
-
+# Use absolute imports instead of relative imports
+from my_bot.__version__ import __version__, __version_code__
+from my_bot.config import API_HASH, API_ID, TOKEN, log_chat
 
 logger = logging.getLogger(__name__)
-
 
 class PornHub(Client):
     def __init__(self):
