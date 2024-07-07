@@ -3,8 +3,8 @@ import time
 import logging
 from pyrogram import Client, errors
 from pyrogram.raw.all import layer
-from Pornhub.__version__ import __version__, __version_code__
-from Pornhub.config import API_HASH, API_ID, TOKEN, log_chat
+from PornHub.__version__ import __version__, __version_code__
+from PornHub.config import API_HASH, API_ID, TOKEN, log_chat
 
 logger = logging.getLogger(__name__)
 
