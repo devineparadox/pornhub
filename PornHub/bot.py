@@ -1,6 +1,8 @@
 # Pornhub/bot.py
 import time
 import logging
+import pyrogram
+
 from pyrogram import Client, errors
 from pyrogram.raw.all import layer
 from PornHub.__version__ import __version__, __version_code__
