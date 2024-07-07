@@ -17,9 +17,9 @@ def humanbytes(size):
 
 def edit_msg(client, message, to_edit):
     try:
-        asyncio.run_coroutine_threadsafe(message.edit(to_edit), client.loop)
+        client.loop.create_task(message.edit(to_edit))
     except FloodWait as e:
-        asyncio.run_coroutine_threadsafe(asyncio.sleep(e.x), client.loop)
+        client.loop.create_task(asyncio.sleep(e.value))
     except MessageNotModified:
         pass
     except TypeError:
@@ -35,6 +35,4 @@ def download_progress_hook(d, message, client):
         percent = d.get("_percent_str", "N/A")
         speed = d.get("_speed_str", "N/A")
         to_edit = f"📥 <b>Downloading!</b>\n\n<b>Name :</b> <code>{file_name}</code>\n<b>Size :</b> <code>{total}</code>\n<b>Speed :</b> <code>{speed}</code>\n<b>ETA :</b> <code>{eta}</code>\n\n<b>Percentage: </b> <code>{current}</code> from <code>{total} (__{percent}__)</code>"
-        
-        # Ensure safe interaction with client's event loop
-        asyncio.run_coroutine_threadsafe(edit_msg(client, message, to_edit), client.loop)
+        threading.Thread(target=edit_msg, args=(client, message, to_edit)).start()
