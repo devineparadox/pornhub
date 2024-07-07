@@ -1,11 +1,10 @@
-# PornHub/bot.py
+# Pornhub/bot.py
 import time
 import logging
-import asyncio
 from pyrogram import Client, errors
 from pyrogram.raw.all import layer
-from PornHub.__version__ import __version__, __version_code__
-from PornHub.config import API_HASH, API_ID, TOKEN, log_chat
+from Pornhub.__version__ import __version__, __version_code__
+from Pornhub.config import API_HASH, API_ID, TOKEN, log_chat
 
 logger = logging.getLogger(__name__)
 
@@ -44,21 +43,13 @@ class PornHub(Client):
         except errors.BadRequest:
             logger.warning("Unable to send message to log_chat!")
 
-    async def stop(self, *args):
+    async def stop(self):
         await super().stop()
         logger.warning("PornHub stopped, Bye!")
 
 def main():
     app = PornHub()
-    loop = asyncio.get_event_loop()
-
-    try:
-        loop.run_until_complete(app.start())
-        loop.run_forever()
-    except (KeyboardInterrupt, SystemExit):
-        loop.run_until_complete(app.stop())
-    finally:
-        loop.close()
+    app.run()
 
 if __name__ == "__main__":
     main()
