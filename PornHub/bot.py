@@ -2,25 +2,24 @@
 import time
 import logging
 import pyrogram
-
 from pyrogram import Client, errors
 from pyrogram.raw.all import layer
 from PornHub.__version__ import __version__, __version_code__
 from PornHub.config import API_HASH, API_ID, TOKEN, log_chat
 
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class PornHub(Client):
     def __init__(self):
         name = self.__class__.__name__.lower()
-
         super().__init__(
             name=name,
             app_version=f"PornHub v{__version__}",
             api_id=API_ID,
             api_hash=API_HASH,
             bot_token=TOKEN,
-            plugins=dict(root="Pornhub.plugins"),
+            plugins=dict(root="PornHub.plugins"),
             in_memory=True,
         )
 
@@ -42,8 +41,8 @@ class PornHub(Client):
 
         try:
             await self.send_message(chat_id=log_chat, text=start_message)
-        except errors.BadRequest:
-            logger.warning("Unable to send message to log_chat!")
+        except errors.BadRequest as e:
+            logger.warning("Unable to send message to log_chat: %s", e)
 
     async def stop(self):
         await super().stop()
@@ -51,7 +50,10 @@ class PornHub(Client):
 
 def main():
     app = PornHub()
-    app.run()
+    try:
+        app.run()
+    except Exception as e:
+        logger.error("An error occurred: %s", e)
 
 if __name__ == "__main__":
     main()
