@@ -1,1 +1,1 @@
-worker: python run_bot.py
+python PornHub/bot.py
