@@ -1,6 +1,6 @@
 # run_bot.py
 import asyncio
-from Pornhub.bot import PornHub
+from PornHub.bot import PornHub
 
 async def main():
     app = PornHub()
