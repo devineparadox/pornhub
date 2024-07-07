@@ -2,7 +2,7 @@ import os
 import asyncio
 import youtube_dl
 
-from ..config import log_chat, sub_chat
+from PornHub.config import log_chat, sub_chat
 from .function import download_progress_hook
 from pornhub_api import PornhubApi
 from pornhub_api.backends.aiohttp import AioHttpBackend
