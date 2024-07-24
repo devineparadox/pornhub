@@ -1,1 +1,1 @@
-python PornHub/bot.py
+worker: python PornHub/bot.py
