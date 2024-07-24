@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "env": {
+    "API_ID": {
+      "required": true
+    },
+    "API_HASH": {
+      "required": true
+    },
+    "BOT_TOKEN": {
+      "required": true
+    },
+    "START_IMG": {
+      "required": true
+    },
+    "BOT_NAME": {
+      "required": true
+    }
+  }
+  }
