@@ -1,0 +1,15 @@
+version: 1
+
+services:
+  - type: worker
+    name: telegram-bot
+    command: python PornHub/bot.py
+    env:
+      API_ID: ${API_ID}
+      API_HASH: ${API_HASH}
+      BOT_TOKEN: ${BOT_TOKEN}
+      START_IMG: ${START_IMG}
+      BOT_NAME: ${BOT_NAME}
+    build:
+      pip:
+        requirements: requirements.txt
