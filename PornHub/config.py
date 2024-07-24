@@ -2,7 +2,7 @@ from typing import List
 
 API_ID: int = 21264701
 API_HASH: str = "6c053fa8e2e7f5cd1699e4501ef13f52"
-TOKEN: str = "7398435280:AAHeeVoKp5uEBI_1BsGmgBGPJ0KlpTC4loY"
+TOKEN: str = "7299207327:AAHto07gVxpfMu4J5YN42Ul_bd3JZC6Ud8I"
 
 log_chat: int = -1002105459243
 sub_chat: str = "devine_log"
